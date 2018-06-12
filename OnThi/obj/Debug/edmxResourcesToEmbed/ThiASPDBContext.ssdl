@@ -1,0 +1,44 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="ThiASPModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="tblCat">
+    <Key>
+      <PropertyRef Name="CatID" />
+    </Key>
+    <Property Name="CatID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="CatName" Type="nvarchar" MaxLength="50" />
+    <Property Name="CatStatus" Type="int" />
+    <Property Name="CatDescription" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="tblPro">
+    <Key>
+      <PropertyRef Name="ProID" />
+    </Key>
+    <Property Name="ProID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ProName" Type="nvarchar" MaxLength="50" />
+    <Property Name="ProStatus" Type="int" />
+    <Property Name="ProDescription" Type="nvarchar" MaxLength="50" />
+    <Property Name="CatID" Type="int" />
+  </EntityType>
+  <Association Name="FK_tblPro_tblCat">
+    <End Role="tblCat" Type="Self.tblCat" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="tblPro" Type="Self.tblPro" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblCat">
+        <PropertyRef Name="CatID" />
+      </Principal>
+      <Dependent Role="tblPro">
+        <PropertyRef Name="CatID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="ThiASPModelStoreContainer">
+    <EntitySet Name="tblCat" EntityType="Self.tblCat" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblPro" EntityType="Self.tblPro" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_tblPro_tblCat" Association="Self.FK_tblPro_tblCat">
+      <End Role="tblCat" EntitySet="tblCat" />
+      <End Role="tblPro" EntitySet="tblPro" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

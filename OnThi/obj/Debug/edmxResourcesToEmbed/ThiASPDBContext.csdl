@@ -1,0 +1,46 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="ThiASPModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="tblCat">
+    <Key>
+      <PropertyRef Name="CatID" />
+    </Key>
+    <Property Name="CatID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="CatName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="CatStatus" Type="Int32" />
+    <Property Name="CatDescription" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="tblProes" Relationship="Self.FK_tblPro_tblCat" FromRole="tblCat" ToRole="tblPro" />
+  </EntityType>
+  <EntityType Name="tblPro">
+    <Key>
+      <PropertyRef Name="ProID" />
+    </Key>
+    <Property Name="ProID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ProName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="ProStatus" Type="Int32" />
+    <Property Name="ProDescription" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="CatID" Type="Int32" />
+    <NavigationProperty Name="tblCat" Relationship="Self.FK_tblPro_tblCat" FromRole="tblPro" ToRole="tblCat" />
+  </EntityType>
+  <Association Name="FK_tblPro_tblCat">
+    <End Role="tblCat" Type="Self.tblCat" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="tblPro" Type="Self.tblPro" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblCat">
+        <PropertyRef Name="CatID" />
+      </Principal>
+      <Dependent Role="tblPro">
+        <PropertyRef Name="CatID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="ThiASPEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="tblCats" EntityType="Self.tblCat" />
+    <EntitySet Name="tblProes" EntityType="Self.tblPro" />
+    <AssociationSet Name="FK_tblPro_tblCat" Association="Self.FK_tblPro_tblCat">
+      <End Role="tblCat" EntitySet="tblCats" />
+      <End Role="tblPro" EntitySet="tblProes" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

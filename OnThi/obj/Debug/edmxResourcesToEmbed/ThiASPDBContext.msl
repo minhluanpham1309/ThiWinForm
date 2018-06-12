@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="ThiASPModelStoreContainer" CdmEntityContainer="ThiASPEntities">
+    <EntitySetMapping Name="tblCats">
+      <EntityTypeMapping TypeName="ThiASPModel.tblCat">
+        <MappingFragment StoreEntitySet="tblCat">
+          <ScalarProperty Name="CatID" ColumnName="CatID" />
+          <ScalarProperty Name="CatName" ColumnName="CatName" />
+          <ScalarProperty Name="CatStatus" ColumnName="CatStatus" />
+          <ScalarProperty Name="CatDescription" ColumnName="CatDescription" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblProes">
+      <EntityTypeMapping TypeName="ThiASPModel.tblPro">
+        <MappingFragment StoreEntitySet="tblPro">
+          <ScalarProperty Name="ProID" ColumnName="ProID" />
+          <ScalarProperty Name="ProName" ColumnName="ProName" />
+          <ScalarProperty Name="ProStatus" ColumnName="ProStatus" />
+          <ScalarProperty Name="ProDescription" ColumnName="ProDescription" />
+          <ScalarProperty Name="CatID" ColumnName="CatID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>
